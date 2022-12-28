@@ -11,19 +11,16 @@ while (!savedMonkeys.has(root1) || !savedMonkeys.has(root2)) {
     let monkeySays = monkey.split(':')[1];
   
     if (monkeyName === 'root') {
-      if (root1 === undefined) {
-        root1 = monkeySays.slice(1,5);
-      }
-      
-      if (root2 === undefined) {
-        root2 = monkeySays.slice(8);
-      }
+      root1 = monkeySays.slice(1,5);
+      root2 = monkeySays.slice(8);
+      monkeys.splice(monkeys.indexOf(monkey), 1);
     } 
     // not root monkeys
     else {
       // number monkeys
      if (Number.isInteger(Number(monkeySays))) {
       savedMonkeys.set(monkeyName, Number(monkeySays));
+      monkeys.splice(monkeys.indexOf(monkey), 1);
      }
      // 2 monkeys with operation
      else {
@@ -42,6 +39,7 @@ while (!savedMonkeys.has(root1) || !savedMonkeys.has(root2)) {
         } else {
           savedMonkeys.set(monkeyName, savedMonkeys.get(monkey1) / savedMonkeys.get(monkey2));
         }
+        monkeys.splice(monkeys.indexOf(monkey), 1);
       }
      }
     }
